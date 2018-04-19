@@ -9,46 +9,7 @@ import { catchOffline } from '@ngx-pwa/offline';
 
 @Component({
   selector: 'app-home',
-  template: `
-  <h2> tabla de datos de la NASA</h2>
- <div   class="col-12 botonera">
- <span> <button   class="btn btn-danger" (click)="activos()" >  Activos </button></span>
- <span> <button   class="btn btn-danger" (click)="desactivos()">  desactivados </button></span>
- <span   *ngIf="statusClick===1"> <button   class="btn btn-danger" (click)="todos()">  todos </button></span></div>
- <div  class="form-row">
-      <div class="form-group col-4">
-      <label for="inputEmail2"> Por Contactos</label>
-      <input type="text" class="form-control" id="inputEmail2" (keyup)='updateFilterContact($event.target.value)'>
-      
-      </div>
-        <div class="form-group col-4">
-        <label for="inputEmail4">Por ciudades</label>
-         <input type="text" class="form-control" id="inputEmail4" (keyup)='updateFilterCitys($event.target.value)'>
-
-        </div>
-
-        <div class="form-group col-4">
-        <label for="inputEmail41">Por codigo postal</label>
-         <input type="text" class="form-control" id="inputEmail41" (keyup)='updateFilterPostal($event.target.value)'>
-
-        </div>
-
-
-</div>
-
- <ngx-datatable
- #table
- class='material'
- [columns]="columns"
- [columnMode]="'force'"
- [headerHeight]="50"
- [footerHeight]="50"
- [rowHeight]="'auto'"
- [limit]="10"
- [rows]='data$ | async'>
-</ngx-datatable>
- 
- `,
+  templateUrl: 'home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
@@ -57,13 +18,9 @@ export class HomeComponent implements OnInit {
   rows: any;
   
     temp = [];
+    selected  = [];
   
-    columns = [
-      { prop: 'city' },
-      { name: 'contact' },
-      { prop: 'location_zip' },
-      { prop: 'status' }
-    ];
+
 
  statusClick = 0;
   constructor(  public serve: DataService){
@@ -79,10 +36,13 @@ export class HomeComponent implements OnInit {
  
   }
 
-
+/**  updateFilterContact(event)
+ * esta funcion filtra por contactos
+ * @param event 
+ */
 
   updateFilterContact(event) {
-
+    this.selected  = [];
     const val = event;
     const temp = this.serve.getDS().pipe(map(item => item.filter(sta2  => sta2.contact.toLowerCase().indexOf(val) !== -1 || !val)));
     // update the rows
@@ -91,8 +51,14 @@ export class HomeComponent implements OnInit {
     this.table.offset = 0;
   }
 
+/**  updateFilterCitys(event)
+ * esta funcion filtra por ciudades
+ * @param event 
+ */
+
+
   updateFilterCitys(event) {
-    
+        this.selected  = [];
         const val = event;
         const temp = this.serve.getDS().pipe(map(item => item.filter(sta2  => sta2.city.toLowerCase().indexOf(val) !== -1 || !val)));
         // update the rows
@@ -101,8 +67,13 @@ export class HomeComponent implements OnInit {
         this.table.offset = 0;
       }
 
-      updateFilterPostal(event) {
-        
+/**  updateFilterPostal(event)
+ * esta funcion filtra por codigo postals
+ * @param event 
+ */
+
+  updateFilterPostal(event) {
+           this.selected  = [];
             const val = event;
             const temp = this.serve.getDS().pipe(map(item => item.filter(sta2  => sta2.location_zip.indexOf(val) !== -1 || !val)));
             // update the rows
@@ -111,17 +82,28 @@ export class HomeComponent implements OnInit {
             this.table.offset = 0;
           }
 
-  activos(){
+/**  activos()
+ * esta funcion filtra por  status activos
+ * 
+ */
+      
+
+  activos(){  
+      this.selected  = [];
       const temp = this.serve.getDS().pipe(map(item => item.filter(sta => sta.status === 'Active')));
-       this.data$ = temp;
+      this.data$ = temp;
         // Whenever the filter changes, always go back to the first page
         this.table.offset = 0;
         this.statusClick = 1 ;
 
   }
 
-
+/**  activos()
+ * esta funcion filtra por  status desactivos
+ * 
+ */
   desactivos(){
+    this.selected  = [];
     const temp = this.serve.getDS().pipe(map(item => item.filter(sta => sta.status === 'Inactive')));
      this.data$ = temp;
       // Whenever the filter changes, always go back to the first page
@@ -130,13 +112,34 @@ export class HomeComponent implements OnInit {
 
 }
 
-todos(){
-  const temp = this.serve.getDS();
-   this.data$ = temp;
-    // Whenever the filter changes, always go back to the first page
-    this.table.offset = 0;
-    this.statusClick = 0 ;
+/**  todos()
+ * muestra todos
+ *
+ */
 
-}
+  todos(){
+    const temp = this.serve.getDS();
+    this.data$ = temp;
+      // Whenever the filter changes, always go back to the first page
+      this.table.offset = 0;
+      this.statusClick = 0 ;
+
+  }
+
+  onSelect({ selected }) {
+    console.log('Select Event', selected, this.selected);
+
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+  }
+
+  onActivate(event) {
+    console.log('Activate Event', event);
+  }
+
+  displayCheck(row) {
+    return row.name !== 'Robert Bruce';
+  }
+
 
 }
