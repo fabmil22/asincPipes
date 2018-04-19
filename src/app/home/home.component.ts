@@ -14,8 +14,28 @@ import { catchOffline } from '@ngx-pwa/offline';
  <div   class="col-12 botonera">
  <span> <button   class="btn btn-danger" (click)="activos()" >  Activos </button></span>
  <span> <button   class="btn btn-danger" (click)="desactivos()">  desactivados </button></span>
- <span   *ngIf="statusClick===1"> <button   class="btn btn-danger" (click)="todos()">  todos </button></span>
+ <span   *ngIf="statusClick===1"> <button   class="btn btn-danger" (click)="todos()">  todos </button></span></div>
+ <div  class="form-row">
+      <div class="form-group col-4">
+      <label for="inputEmail2"> Por Contactos</label>
+      <input type="text" class="form-control" id="inputEmail2" (keyup)='updateFilterContact($event.target.value)'>
+      
+      </div>
+        <div class="form-group col-4">
+        <label for="inputEmail4">Por ciudades</label>
+         <input type="text" class="form-control" id="inputEmail4" (keyup)='updateFilterCitys($event.target.value)'>
+
+        </div>
+
+        <div class="form-group col-4">
+        <label for="inputEmail41">Por codigo postal</label>
+         <input type="text" class="form-control" id="inputEmail41" (keyup)='updateFilterPostal($event.target.value)'>
+
+        </div>
+
+
 </div>
+
  <ngx-datatable
  #table
  class='material'
@@ -61,21 +81,35 @@ export class HomeComponent implements OnInit {
 
 
 
-  updateFilter(event) {
+  updateFilterContact(event) {
 
-    const val = event.target.value.toLowerCase();
-
-   
-   const temp = this.serve.getDS().pipe(map(item => item.filter(sta => sta.status === 'Active')));
-
- console.log(temp);
-
+    const val = event;
+    const temp = this.serve.getDS().pipe(map(item => item.filter(sta2  => sta2.contact.toLowerCase().indexOf(val) !== -1 || !val)));
     // update the rows
-    this.rows = temp;
+    this.data$ = temp;
     // Whenever the filter changes, always go back to the first page
     this.table.offset = 0;
   }
 
+  updateFilterCitys(event) {
+    
+        const val = event;
+        const temp = this.serve.getDS().pipe(map(item => item.filter(sta2  => sta2.city.toLowerCase().indexOf(val) !== -1 || !val)));
+        // update the rows
+        this.data$ = temp;
+        // Whenever the filter changes, always go back to the first page
+        this.table.offset = 0;
+      }
+
+      updateFilterPostal(event) {
+        
+            const val = event;
+            const temp = this.serve.getDS().pipe(map(item => item.filter(sta2  => sta2.location_zip.indexOf(val) !== -1 || !val)));
+            // update the rows
+            this.data$ = temp;
+            // Whenever the filter changes, always go back to the first page
+            this.table.offset = 0;
+          }
 
   activos(){
       const temp = this.serve.getDS().pipe(map(item => item.filter(sta => sta.status === 'Active')));
