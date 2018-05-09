@@ -7,21 +7,28 @@ import { DataService } from './services/data.service';
 import { HomeComponent } from './home/home.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { OfflineModule } from '@ngx-pwa/offline';
+import { AppRoutingModule } from './app-routing.module';
+import { CommercialManagementComponent } from './commercial-management/commercial-management.component';
+import { ComercialManagamentService } from './services/comercial-managament.service';
+import { SidebarComponent } from './share/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    CommercialManagementComponent,
+    SidebarComponent
   ],
   imports: [
     NgxDatatableModule,
     BrowserModule ,
     HttpClientModule,
     OfflineModule,
-    NgbModule
+    NgbModule,
+    AppRoutingModule
 
   ],
-  providers: [DataService],
+  providers: [DataService , ComercialManagamentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

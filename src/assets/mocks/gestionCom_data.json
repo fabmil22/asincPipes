@@ -1,0 +1,25 @@
+[
+    {
+        
+        "SociedadPropetaria": "Sociedad Alfa",
+        "UltimoEstado":"12/02/2018" ,
+        "alta": "12/02/2018",
+        "idOportunidad": "183634",
+        "cumpleMS": "no",
+        "inclusion": false,
+        "id":1
+        
+    },
+
+    {
+        
+        "SociedadPropetaria": "Sociedad omega",
+        "UltimoEstado":"15/02/2018" ,
+        "alta": "12/01/2018",
+        "idOportunidad": "185634",
+        "cumpleMS": "si",
+        "inclusion": true,
+        "id":2
+        
+    }
+]

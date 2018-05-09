@@ -4,18 +4,16 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
-export class DataService {
+export class ComercialManagamentService {
 
   constructor( public http: HttpClient ) { }
 
-  urldata = '../../assets/mocks/situation.json';
+    urldata1 = '../../assets/mocks/gestionCom_data.json';
 
-  getDS(): Observable <any> {
+    getDS(): Observable <any> {
 
-  return this.http.get(this.urldata);
+    return this.http.get(this.urldata1);
 
-  }
+    }
 
 }
-
-

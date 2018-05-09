@@ -1,48 +1,25 @@
-<h2> Tabla de datos de la NASA</h2>
-<h6> Filtrado de datos</h6>
-<div   class="col-12 botonera">
-<span> <button   class="btn btn-danger" (click)="activos()" >  Activos </button></span>
-<span> <button   class="btn btn-danger" (click)="desactivos()">  desactivados </button></span>
-<span   *ngIf="statusClick===1"> <button   class="btn btn-danger" (click)="todos()">  todos </button></span></div>
-<div  class="form-row">
-    <div class="form-group col-4">
-    <label for="inputEmail2"> Por Contactos</label>
-    <input type="text" class="form-control" id="inputEmail2" (keyup)='updateFilterContact($event.target.value)'>
-    
-    </div>
-      <div class="form-group col-4">
-      <label for="inputEmail4">Por ciudades</label>
-       <input type="text" class="form-control" id="inputEmail4" (keyup)='updateFilterCitys($event.target.value)'>
 
-      </div>
+<div class="contanier">
+<div  class="titlecontent"><span class="spaceTitle">{{ titular }}</span> <div>
 
-      <div class="form-group col-4">
-      <label for="inputEmail41">Por codigo postal</label>
-       <input type="text" class="form-control" id="inputEmail41" (keyup)='updateFilterPostal($event.target.value)'>
-
-      </div>
-
-
-</div>
 <div  class="row">
-<div  class="col-8">
+<div  class="col-md-12">
 
   <ngx-datatable
   #table
-  class='material'
+  class='material striped'
   [columnMode]="'force'"
   [headerHeight]="50"
   [footerHeight]="50"
   [rowHeight]="'auto'"
-  [limit]="8"
+  [limit]="11"
   [selected]="selected"
   [selectionType]="'checkbox'"
   [selectAllRowsOnPage]="false"
   [displayCheck]="displayCheck"
-  (activate)="onActivate($event)"
-  (select)='onSelect($event)'
+  
   [rows]='data$ | async'>
-  <ngx-datatable-column
+  <!-- <ngx-datatable-column
   [width]="30"
   [sortable]="false"
   [canAutoResize]="false"
@@ -50,24 +27,36 @@
   [resizeable]="false"
   [headerCheckboxable]="true"
   [checkboxable]="true">
+</ngx-datatable-column> -->
+
+<ngx-datatable-column name="metrica" prop="metrica" [width]="300"></ngx-datatable-column>
+<ngx-datatable-column name="calculo" prop="calculo"></ngx-datatable-column>
+<ngx-datatable-column name="Ultimo Periodo<br> Importado" prop="ultiP"></ngx-datatable-column>
+<ngx-datatable-column name="% Cumplimiento <br> Periodo" prop="cumplimientoPeriodo"></ngx-datatable-column>
+<ngx-datatable-column name="Stock Cumplemiento <br> Periodo" prop="stockCumplemientoPeriodo"></ngx-datatable-column>
+<ngx-datatable-column name="Stock Total <br> Periodo" prop="stockTotalPeriodo"></ngx-datatable-column>
+<ngx-datatable-column name="Estado" prop="estado"></ngx-datatable-column>
+
+
+<ngx-datatable-column name="Actions" sortable="false" prop="func">
+  
+  <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+      <button md-icon-button (click)="redideccion(value )" >
+        
+       >
+      </button>
+      
+  </ng-template>
 </ngx-datatable-column>
-<ngx-datatable-column name="contact"></ngx-datatable-column>
-<ngx-datatable-column name="city"></ngx-datatable-column>
-<ngx-datatable-column prop="location_zip"></ngx-datatable-column>
+
 
   </ngx-datatable>
 
 </div>
-<div  class="col-4">
-  <div class='selected-column'>
-    <h4>Selections</h4>
-    <ul>
-      <li *ngFor='let sel of selected'>
-        {{sel.city}}
-      </li>
-      <li *ngIf="!selected.length">No Selections</li>
-    </ul>
-  </div>
+
+
+
+
 </div>
 
 </div>

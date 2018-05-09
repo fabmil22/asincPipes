@@ -1,0 +1,71 @@
+[
+    {
+        "metrica":  "Gestion Comercial",
+        "calculo": "semanal",
+        "ultiP": "2018-03",
+        "cumplimientoPeriodo": 99,
+        "stockCumplemientoPeriodo": "5.634",
+        "stockTotalPeriodo": "5.634",
+        "estado": 1,
+        "id":1,
+        "func": "gestion"
+    },
+  
+   {
+        "metrica":   "Depuración comercial de Inmuebles",
+        "calculo": "semanal",
+        "ultiP": "2018-03",
+        "cumplimientoPeriodo": 99,
+        "stockCumplemientoPeriodo": "5.634",
+        "stockTotalPeriodo": "5.634",
+        "estado": 1,
+        "id":2,
+        "func": "depuracion"
+    },
+    {
+      "metrica":  "Expedientes completos",
+      "calculo": "semanal",
+      "ultiP": "2018-03",
+      "cumplimientoPeriodo": 99,
+      "stockCumplemientoPeriodo": "5.634",
+      "stockTotalPeriodo": "5.634",
+      "estado": 1,
+      "id":3,
+      "func": "Expediente"
+  },
+  
+  {
+      "metrica":   "Sanamiento Jurídico",
+      "calculo": "semanal",
+      "ultiP": "2018-03",
+      "cumplimientoPeriodo": 99,
+      "stockCumplemientoPeriodo": "5.634",
+      "stockTotalPeriodo": "5.634",
+      "estado": 1,
+      "id":4,
+      "func": "Sanamiento"
+  },
+  {
+    "metrica":  "Seguimiento Obras en Curso",
+    "calculo": "semanal",
+    "ultiP": "2018-03",
+    "cumplimientoPeriodo": 99,
+    "stockCumplemientoPeriodo": "5.634",
+    "stockTotalPeriodo": "5.634",
+    "estado": 1,
+    "id":5,
+    "func": "Seguimiento"
+  },
+  
+  {
+    "metrica":  "Gestón de Suelos",
+    "calculo": "semanal",
+    "ultiP": "2018-03",
+    "cumplimientoPeriodo": 99,
+    "stockCumplemientoPeriodo": "5.634",
+    "stockTotalPeriodo": "5.634",
+    "estado": 1,
+    "id":6,
+    "func": "gestionS"
+  }]
+  

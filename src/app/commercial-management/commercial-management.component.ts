@@ -1,18 +1,17 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ComercialManagamentService } from '../services/comercial-managament.service';
 import { Observable } from 'rxjs/';
 import { map } from 'rxjs/operators';
 
-import { DataService } from './../services/data.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { filter } from 'rxjs/operator/filter';
 import { catchOffline } from '@ngx-pwa/offline';
-
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-commercial-management',
+  templateUrl: './commercial-management.component.html',
+  styleUrls: ['./commercial-management.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class CommercialManagementComponent implements OnInit {
 
   @ViewChild(DatatableComponent) table: DatatableComponent;
   rows: any;
@@ -20,19 +19,21 @@ export class HomeComponent implements OnInit {
     temp = [];
     selected  = [];
     columns = [
-      { name : 'metrica', width: 160, titular: 'Metrica'} ,
-      { name: 'calculo', width: 100, titular: 'Calculo' },
-      { name : 'ultiP', width: 108, titular: 'Ultimo Periodo<br> Importado'  },
-      { name: 'cumplimientoPeriodo', width: 110, titular: '% Cumplimiento <br> Periodo' },
-      { name: 'stockCumplemientoPeriodo', width: 110, titular: 'Stock Cumplemiento <br> Periodo' },
-      { name: 'stockTotalPeriodo', width: 110, titular: 'Stock Total<br> Periodo' },
-      { name: 'estado', width: 110, titular: 'Estado' },
-      { link: '', width: 100, titular: '' }] ;
-    titular = 'Situación Actual de Indicadores';
+      
+      { name : 'cumpleMS', width: 60, titular: 'Cumple MS'} ,
+      { name: 'idOportunidad', width: 80, titular: 'Id Oportunidad' },
+      { name : 'alta', width: 80, titular: 'Alta'  },
+      { name: 'UltimoEstado', width: 80, titular: 'Ultimo Estado' },
+      { name: 'SociedadPropetaria', width: 210, titular: 'SociedadPropetaria' }
+      ] ;
+
+
+    titular = 'Metrícas semanal: Gestión Comercial';
 
 
  statusClick = 0;
-  constructor(  public serve: DataService){
+
+  constructor(  public serve: ComercialManagamentService ){
 
  
    }
@@ -134,7 +135,7 @@ export class HomeComponent implements OnInit {
       this.statusClick = 0 ;
 
   }
-/*
+
   onSelect({ selected }) {
     console.log('Select Event', selected, this.selected);
 
@@ -144,37 +145,9 @@ export class HomeComponent implements OnInit {
 
   onActivate(event) {
     console.log('Activate Event', event);
-  }*/
+  }
 
   displayCheck(row) {
     return row.name !== 'Robert Bruce';
   }
-  
-  redideccion(value){
-    switch(value) {
-      case 'gestion':
-          console.log('gestion');
-          break;
-      case 'depuracion':
-          console.log('depuracio');
-          break;
-      case 'Expediente':
-          console.log('Expediente');
-          break;
-     case 'gestionS':
-          console.log('gestionS');
-          break;
-    case 'Sanamiento':
-          console.log('Sanamiento');
-          break;
-    case 'Seguimiento':
-          console.log('Seguimiento');
-          break;
-      default:
-         break;
-  }
-
-  }
-  
-
 }
